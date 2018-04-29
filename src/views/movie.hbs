@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <div class="ui segment">
+      <h1>{{movie.titulo}}</h1>
+      <div class="ui two column grid container">
+        <ul>
+          {{#if movie}}
+          <li>Id: {{movie.id}}</li>
+          <li>Release Date: {{movie.anoPublicacao}}</li>
+          <li>Duration: {{movie.duracao}} minutes</li>
+          {{else}}
+          <h2>Nothing to show...</h2>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

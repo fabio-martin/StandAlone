@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <div class="ui segment">
+      <h1>Session(s)</h1>
+      <div class="ui two column grid container">
+        <ul>
+          {{#if sessions}}
+          {{#each sessions}}
+          <li><a href="/movies/{{filme.id}}">{{filme.titulo}}</a> {{data}}</li>
+          {{/each}}
+          {{else}}
+          <h2>Nothing to show...</h2>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
