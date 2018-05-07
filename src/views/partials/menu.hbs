@@ -1,0 +1,23 @@
+   <div class="ui inverted pointing menu">
+      <div class="ui container">
+        <a class="item active" href="/otra/home"><i class="plus symbol icon"></i> Home</a>
+        <a class="item" href="/movies"><i class="film icon"></i> Movies</a>
+        <a class="item" href="/cinemas"><i class="film icon"></i> Cinemas</a>
+      
+      
+    
+
+        <div class="right menu">
+            {{#if user}}
+                <div class="ui item">
+                    {{user.name}}
+                    <img class="ui spaced avatar image" src="{{user.gravatar}}" />
+                   ({{user.profile}}) 
+                </div>
+                <a class="ui item" href="{{signInRoutes.logout}}">Sign out</a>
+            {{else}}
+                <a class="ui item" href="{{signInRoutes.login}}">Sign in</a>
+            {{/if}}
+        </div>
+    </div>
+    </div>

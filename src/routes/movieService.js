@@ -14,7 +14,7 @@ module.exports = function getMovie(id, cb){
         if (data.status_code = 34 && data.status_message){
             return cb(new Error(data.status_message))
         }
-        const filme = new Movie(id, data.title, data.release_date, data.runtime)
+        const filme = new Movie(id, data.title, data.release_date, data.runtime, data.poster_path)
         cb(null, filme)
     })
 }

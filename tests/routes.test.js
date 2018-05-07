@@ -9,10 +9,13 @@ const Filme = require('../src/model/filme')
 const Sala = require('../src/model/sala')
 const Sessao = require('../src/model/sessao')
 const repoFactory = require('../src/repo/repository')
+const fakeRepos = require('./fakes/fake_repos')
+const fakeUsersRepo = fakeRepos.createUsersRepo()
 
 test('routes test: GET /movies/:id expecting 200', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const path = __dirname;
+    const app = routes(repository, fakeUsersRepo, __dirname)
     const movieId = 269149
     assert.plan(2)
     request(app)
@@ -31,7 +34,7 @@ test('routes test: GET /movies/:id expecting 200', function(assert) {
 
 test('routes test: GET /movies/:id without query string', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
     assert.plan(1)
     request(app)
         .get('/movies/moviesId')
@@ -44,7 +47,7 @@ test('routes test: GET /movies/:id without query string', function(assert) {
 
 test('routes test: POST /cinema with invalid body', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     assert.plan(1)
     request(app)
@@ -58,7 +61,7 @@ test('routes test: POST /cinema with invalid body', function(assert) {
 
 test('routes test: POST /cinema for new cinema (redirect)', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     const id = repository.__cinemas__.size + 1
     const cinName = 'Amenic'
@@ -69,8 +72,8 @@ test('routes test: POST /cinema for new cinema (redirect)', function(assert) {
         .post('/cinema')
         .type('form')
         .send({
-            name: cinName,
-            city: cinCity
+            nome: cinName,
+            cidade: cinCity
         })
         .expect(303)
         .redirects(0)
@@ -89,7 +92,7 @@ test('routes test: POST /cinema for new cinema (redirect)', function(assert) {
 
 test('routes test: GET /cinemas expecting 200', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     const cinema = new Cinema('Cinema Test', 'Cidade Test')
     repository.addCinema(cinema)
@@ -114,7 +117,7 @@ test('routes test: GET /cinemas expecting 200', function(assert) {
 
 test('routes test: GET /cinema/:id/rooms without query string', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     assert.plan(1)
     request(app)
@@ -128,7 +131,7 @@ test('routes test: GET /cinema/:id/rooms without query string', function(assert)
 
 test('routes test: GET /cinema/:id/rooms expecting 200', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     const cinema = new Cinema('Cinema Test', 'City Test')
     const room = new Sala('Sala Test', 999, 999)
@@ -155,12 +158,12 @@ test('routes test: GET /cinema/:id/rooms expecting 200', function(assert) {
 
 test('routes test: POST /cinema/:id/room for new Room (redirect) ', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     const cinema = new Cinema('XXXX', 'City')
     repository.addCinema(cinema)
 
-    const room = { name: 'Sessao', nrOfRows: 20, nrOfseatsRow: 20 }
+    const room = { nome: 'Sessao', nrFila: 20, numLugaresFila: 20 }
 
     assert.plan(5)
     request(app)
@@ -175,9 +178,9 @@ test('routes test: POST /cinema/:id/room for new Room (redirect) ', function(ass
                 const roomAct = data[0]
 
                 assert.error(err, 'Room info obtained.')
-                assert.equal(roomAct.nome,  room.name, 'The Name is correct.')
-                assert.equal(roomAct.nrFila,  room.nrOfRows, 'The nrOfRows is correct.')
-                assert.equal(roomAct.numLugaresFila,  room.nrOfseatsRow, 'The nrOfseatsRow is correct.')
+                assert.equal(roomAct.nome,  room.nome, 'The Name is correct.')
+                assert.equal(roomAct.nrdeFilas,  room.nrFilas, 'The nrOfRows is correct.')
+                assert.equal(roomAct.nrLugaresFila,  room.nrLugaresFila, 'The nrOfseatsRow is correct.')
                 assert.end()
             })
         })
@@ -185,8 +188,10 @@ test('routes test: POST /cinema/:id/room for new Room (redirect) ', function(ass
 
 test('routes test: POST /cinema/:id/room with invalid body', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
+    const cinema = new Cinema('XXXX', 'City')
+    repository.addCinema(cinema)
     const cinemaId = 1
 
     assert.plan(1)
@@ -201,7 +206,7 @@ test('routes test: POST /cinema/:id/room with invalid body', function(assert) {
 
 test('routes test: POST /cinema/:id/room without query string', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo,__dirname)
 
     assert.plan(1)
     request(app)
@@ -215,7 +220,7 @@ test('routes test: POST /cinema/:id/room without query string', function(assert)
 
 test('routes test: POST /cinema/:idCinema/room/:idRoom/session with invalid body', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     const cinemaId = 1
     const roomId = 1
@@ -232,7 +237,7 @@ test('routes test: POST /cinema/:idCinema/room/:idRoom/session with invalid body
 
 test('routes test: POST /cinema/:idCinema/room/:idRoom/session without query string', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
 
     assert.plan(1)
@@ -247,7 +252,7 @@ test('routes test: POST /cinema/:idCinema/room/:idRoom/session without query str
 
 test('routes test: POST /cinema/:idCinema/room/:idRoom/session for new Session', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     const cinema = new Cinema('XXXX', 'City')
     const room = new Sala('X123X', 99, 99)
@@ -257,7 +262,7 @@ test('routes test: POST /cinema/:idCinema/room/:idRoom/session for new Session',
     repository.addMovie(movie)
 
     const data = new Date('2018-02-02')
-    const obj = {idMovie: 99999, date: data}
+    const obj = {filme: movie,  data: data}
 
     assert.plan(4)
     request(app)
@@ -274,7 +279,7 @@ test('routes test: POST /cinema/:idCinema/room/:idRoom/session for new Session',
                 const dataEx = Date.parse(data)
 
                 assert.error(err, 'Session info obtained.')
-                assert.equal(sessionAct.filme, movie, 'The movies is correct.')
+                assert.equal( Number(sessionAct.filme.id), movie.id, 'The movies is correct.')
                 assert.equal(dateAct, dataEx, 'The date is correct.')
                 assert.end()
             })
@@ -285,7 +290,7 @@ test('routes test: POST /cinema/:idCinema/room/:idRoom/session for new Session',
 test('routes test: GET /cinema/:idCinema/room/:idRoom/sessions expecting 200', function(assert) {
     assert.plan(4)
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     const movieId = 269149
     const movie = new Filme(1, 'Movie Test', '', 190)
@@ -314,7 +319,7 @@ test('routes test: GET /cinema/:idCinema/room/:idRoom/sessions expecting 200', f
 
 test('routes test: GET /cinema/:idCinema/room/:idRoom/sessions without query string', function(assert) {
     const repository = repoFactory()
-    const app = routes(repository)
+    const app = routes(repository, fakeUsersRepo, __dirname)
 
     assert.plan(1)
     request(app)

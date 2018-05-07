@@ -2,8 +2,9 @@
 
 var id = 1
 
-module.exports = function Sala(nome, nrFila, numLugaresFila, sessoes){
+module.exports = function Sala(nome, nrFila, numLugaresFila, sessoes,idCine ){
     this.id = id++
+    this.idCine = idCine; 
     this.nome = nome
     this.nrFila = nrFila
     this.numLugaresFila = numLugaresFila

@@ -1,0 +1,37 @@
+{
+    "users": [
+        {
+            "username": "palbp",
+            "password": "12345",
+            "name": "Paulo Pereira",
+            "gravatar": "https://s.gravatar.com/avatar/8c77d4c939023b0c767bd5e490b32ac2?s=80",
+            "email": "palbp@cc.isel.ipl.pt",
+            "profile": "admin"
+        },
+        {
+            "username": "admin",
+            "password": "12345",
+            "name": "admin",
+            "gravatar": "https://pt.gravatar.com/userimage/138632325/1e5130ab0459bb791e4c0ce5c607d8e7.jpg",
+            "email": "admin@mail.com",
+            "profile": "admin"
+        },
+        {
+            "username": "cooldog",
+            "password": "12345",
+            "name": "theDog",
+            "gravatar": "https://pt.gravatar.com/userimage/138632325/6dd653fadfa964596ef85e069d32b20e.png",
+            "email": "dog@mail.com",
+            "profile": "client"
+        },
+        {
+            "username": "cat",
+            "password": "12345",
+            "name": "SailorCat",
+            "gravatar": "https://pt.gravatar.com/userimage/138632325/c011866f182de3915417c2b90123029c.jpg",
+            "email": "cat@mail.com",
+            "profile": "client"
+        }
+
+    ]
+}

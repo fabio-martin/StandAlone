@@ -1,18 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {{> head}}
+     {{> head}}
   </head>
-  <body>
+  <body>    
     {{> menu this.menuState}}
-    
+
     <div class="ui segment">
-      <h1>Session(s)</h1>
+      <h1>Movie(s)</h1>
       <div class="ui two column grid container">
         <ul>
-          {{#if sessions}}
-          {{#each sessions}}
-          <li><a href="/movies/{{filme.id}}">{{filme.titulo}}</a> {{data}}</li>
+          {{#if movies}}
+          {{#each movies}}
+          <li>Id: {{id}}</li>
+          <li>Release Date: {{anoPublicacao}}</li>
+          <li>Duration: {{duracao}} minutes</li>
+          <img src="http://image.tmdb.org/t/p/w185/{{poster_path}}" >
           {{/each}}
           {{else}}
           <h2>Nothing to show...</h2>

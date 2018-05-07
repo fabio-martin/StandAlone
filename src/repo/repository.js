@@ -8,11 +8,45 @@ const Sessao = require('../model/sessao')
 module.exports = function createRepo(){
     var repoCinema = new Map()
     var repoMovie = new Map()
-
+    
     return {
 
         __cinemas__: repoCinema,
         __movies__: repoMovie,
+
+        setRepo : (dbFile) => { 
+            const fs = require('fs')
+            
+            const db = JSON.parse(fs.readFileSync(dbFile))
+    
+            const cinemas = db.Cinemas.map( element => new Cinema(element.Nome, element.Cidade))
+            const salas = db.Salas.map(element => new Sala(element.nome, element.nrFila, element.numLugaresFila)) 
+            const sessions = db.Sessoes.map(element => new Sessao(element.filme, element.data)) 
+            const filmes = db.Filmes.map(element => new Filme(element.id, element.titulo,
+                                                              element.anoPublicacao, element.duracao, 
+                                                              element.poster_path))
+                
+            for(let idx = 0; idx < filmes.length ; idx++ )
+                    sessions[idx].filme= filmes[idx]
+
+            cinemas.forEach( cinema => { 
+                salas.forEach( sala => {
+                    sessions.forEach( (sessao) => {
+                        sala.sessoes.set(sessao.id, sessao)}
+                    );
+                    cinema.salas.set(sala.id, sala)
+                })
+           
+                repoCinema.set(cinema.id, cinema)
+            })
+
+            db.Filmes.forEach( element => { 
+                let newMovie =  new Filme( element.id, element.titulo,  element.anoPublicacao, 
+                                            element.duracao, element.poster_path)
+                repoMovie.set(newMovie.id, newMovie)
+
+            })
+        },
 
         addCinema: (cinema) => repoCinema.set(cinema.id, cinema),
 
@@ -83,8 +117,9 @@ module.exports = function createRepo(){
             const cinema = repoCinema.get(idCinema)
             if (!cinema)
                 return cb(new Error(`Cinema (${idCinema}) doesn't found ...`))
-
+            
             cb(null, Array.from(cinema.salas.values()))
+           // cb(null, cinema.salas)
         },
 
         getSessions: (idCinema, idRoom, cb) => {
@@ -92,11 +127,14 @@ module.exports = function createRepo(){
             if (!cinema)
                 return cb(new Error(`Cinema (${idCinema}) doesn't found ...`))
             
-            const room = cinema.salas.get(idRoom)
+            
+            // const room = cinema.salas.get(idRoom)
+            let room = cinema.salas.get(idRoom)
             if (!room)
                 return cb(new Error(`Room (${idRoom}) doesn't found ...`))
 
-            cb(null, Array.from(room.sessoes.values()))
+             cb(null, Array.from(room.sessoes.values()))
+           // cb(null, room.sessoes)
         }
 
     }

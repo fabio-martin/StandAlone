@@ -1,21 +1,33 @@
 <!doctype html>
 <html lang="en">
   <head>
+     {{> head}}
   </head>
   <body>
-    <div class="ui segment">
-      <h1>Cinema(s)</h1>
-      <div class="ui two column grid container">
-        <ul>
-          {{#if cinemas}}
-          {{#each cinemas}}
-          <li>{{nome}} ({{cidade}}) <a href="/cinema/{{id}}/rooms">Rooms</a></li>
-          {{/each}}
-          {{else}}
-          <h2>Nothing to show...</h2>
-          {{/if}}
-        </ul>
-      </div>
+    {{> menu this.menuState}}
+
     </div>
+
+      <div class="ui segment">
+          <div class="ui two column grid container">
+              <div class="column middle aligned">
+                  <img class="ui centered large image" img src="/otra/images/goingtothemovies.jpg"> 
+              </div>
+              <div class="column middle aligned">
+                  <img class="ui centered large image" img src="/otra/images/cinema3.png"> 
+              </div>          
+        </div>
+        <h4 class="ui horizontal divider header">
+            <i class="circular heart outline icon"></i>
+        </h4>
+<!-- 
+          <div class="ui three column grid container">
+            <div class="column right aligned"> Made for </div>
+            <div class="column middle aligned"> 
+                <img class="ui centered mini image" img src="/images/isel_logo.png"> 
+            </div>
+            <div class="column left aligned"> By the Best.. </div>
+          </div>      -->
+       </div>
   </body>
 </html>

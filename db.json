@@ -1,0 +1,114 @@
+{
+    "Cinemas": [
+        {
+            "Nome": "LusoMundo",
+            "Cidade": "Lisboa",
+            "Salas": []
+        },
+        {
+            "Nome": "LusoMundo",
+            "Cidade": "Porto",
+            "Salas": [] 
+        },
+        {
+            "Nome": "UCI",
+            "Cidade": "Coimbra",
+            "Salas": []
+        },
+        {
+            "Nome": "NOS",
+            "Cidade": "Sintra",
+            "Salas": []
+        }
+    ],
+    "Salas" : [
+        {
+            "nome" : "Sala 1", 
+            "nrFila": 4,
+            "numLugaresFila": 20,
+            "sessoes": []
+        },
+        {
+            "nome" : "Sala 2", 
+            "nrFila": 4,
+            "numLugaresFila": 20,
+            "sessoes": []
+        },
+        {
+            "nome" : "Sala 3", 
+            "nrFila": 4,
+            "numLugaresFila": 20,
+            "sessoes": []
+            
+        },
+        {
+            "nome" : "Sala 4", 
+            "nrFila": 4,
+            "numLugaresFila": 20,
+            "sessoes": []
+        }
+    ],
+    "Sessoes" : [ 
+        {
+            "filme" : [],
+            "data" : "2018-05-01"
+        },
+        {
+            "filme" : [],
+            "data" : "2018-05-02"
+        },
+        {
+            "filme" : [],
+            "data" : "2018-05-03"
+        },
+        {
+            "filme" : [],
+            "data" : "2018-05-04"
+        },
+        {
+            "filme" : [],
+            "data" : "2018-05-05"
+        }
+    ],
+    "Filmes" : [ 
+             {
+                "id": 299536,
+                "titulo": "Avengers: Infinity War",
+                "anoPublicacao": "2018-04-25",
+                "duracao": 149,
+                "poster_path" :"/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"   
+            },
+            { 
+                "id": 399174,
+                "titulo": "Isle of Dogs",
+                "anoPublicacao": "2018-03-23",
+                "duracao": 101,
+                "poster_path": "/c0nUX6Q1ZB0P2t1Jo6EeFSVnOGQ.jpg"
+            },
+            { 
+                "id": 338970,
+                "titulo": "Tomb Raider",
+                "anoPublicacao": "2018-03-08",
+                "duracao": 149,
+                "poster_path" :"/ePyN2nX9t8SOl70eRW47Q29zUFO.jpg"
+            },
+            { 
+                "id": 284054,
+                "titulo": "Black Panther",
+                "anoPublicacao": "2018-02-13",
+                "duracao": 134,
+                "poster_path" :"/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+            },
+            { 
+                "id": 248088,
+                "titulo": "Eusébio, The Black Panther",
+                "anoPublicacao": "1973-01-05",
+                "duracao": 86,
+                "poster_path" :"/8CW2GRnCfABCfu2QkdHDxPuD51z.jpg"
+            }
+            
+            
+            
+        ]
+    }
+    
