@@ -1,0 +1,37 @@
+{
+  "name": "standalone",
+  "version": "1.0.0",
+  "description": "This is just a testing repository",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "faucet": "^0.0.1",
+    "hbs": "^4.0.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
+    "supertest": "^3.0.0",
+    "tape": "^4.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabio-martin/StandAlone.git"
+  },
+  "author": "Fabio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabio-martin/StandAlone/issues"
+  },
+  "homepage": "https://github.com/fabio-martin/StandAlone#readme"
+}
