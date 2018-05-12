@@ -5,7 +5,7 @@
  * 
  * @module app
  */
-main(process.argv[2])
+main()
 
 /**
  * The application's entry point.
@@ -13,9 +13,9 @@ main(process.argv[2])
  */
 
 
- function main(port) {
+ function main() {
 
-    port = 8080
+    const port = process.env.PORT || 8080;
     const movieRoute = require('./routes/routes')
     const repo = require('./repo/repository')()
     const path = require('path')

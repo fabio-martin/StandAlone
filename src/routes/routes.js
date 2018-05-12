@@ -72,6 +72,14 @@ module.exports = function (repo, usersRepository,  root) {
         next()
     })
 
+    app.get('/', (req, res) => {
+        res.redirect(303, '/otra/home')
+    })
+
+    app.get('/otra', (req, res) => {
+        res.redirect(303, '/otra/home')
+    })
+
     // Fazer o test do Repo e da Route 
     app.get('/otra/home', (req, res) => {
         res.render('home.hbs', { menuState: { home: 'active', signInRoutes, user: req.user} })
