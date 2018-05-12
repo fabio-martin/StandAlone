@@ -3,7 +3,7 @@
 const Cinema = require('../model/cinema')
 const Sessao = require('../model/sessao')
 const Sala = require('../model/sala')
-const getMovie = require('./movieService')
+const MovieService = require('./movieService')
 const express = require('express')
 
 module.exports = function (repo, usersRepository,  root) {
@@ -80,10 +80,19 @@ module.exports = function (repo, usersRepository,  root) {
         res.redirect(303, '/otra/home')
     })
 
-    // Fazer o test do Repo e da Route 
-    app.get('/otra/home', (req, res) => {
-        res.render('home.hbs', { menuState: { home: 'active', signInRoutes, user: req.user} })
+      // Fazer o test do Repo e da Route 
+      app.get('/otra/home', (req, res) => {
+        MovieService.getNowPlaying((err, movies) => {
+            
+            movies.forEach(mov => repo.addMovie(mov))
+
+            res.render('home.hbs', { 
+                menuState: { home: 'active', signInRoutes, user: req.user},
+                movies: movies
+             })
+        })
     })
+    
     
     // Fazer o test do Repo e da Route 
     app.get('/movies', (req, res) => {
@@ -108,7 +117,7 @@ module.exports = function (repo, usersRepository,  root) {
 
         repo.getMovie(id, (err, movie) => {
             if (err) {
-                getMovie(id, (err, movie) => {
+                MovieService.getMovie(id, (err, movie) => {
                     if (err)
                         throw err;
                     repo.addMovie(movie)

@@ -1,26 +1,68 @@
 <!doctype html>
 <html lang="en">
-  <head>
-     {{> head}}
-  </head>
-  <body>
+
+<head>
+    {{> head}} $('.special.cards .image').dimmer({ on: 'hover' });
+</head>
+
+<body>
     {{> menu this.menuState}}
 
     </div>
 
-      <div class="ui segment">
-          <div class="ui two column grid container">
-              <div class="column middle aligned">
-                  <img class="ui centered large image" img src="/otra/images/goingtothemovies.jpg"> 
-              </div>
-              <div class="column middle aligned">
-                  <img class="ui centered large image" img src="/otra/images/cinema3.png"> 
-              </div>          
+    <div class="ui segment">
+        <div class="ui two column grid container">
+            <div class="column middle aligned">
+                <img class="ui centered large image" img src="/otra/images/goingtothemovies.jpg">
+            </div>
+            <div class="column middle aligned">
+                <img class="ui centered large image" img src="/otra/images/cinema3.png">
+            </div>
         </div>
+        {{!--
         <h4 class="ui horizontal divider header">
             <i class="circular heart outline icon"></i>
-        </h4>
-<!-- 
+        </h4> --}}
+
+        <div class="ui inverted segment">
+            <h2 class="ui white inverted centered header">Filmes em Cartaz</h2>
+        </div>
+
+        <div class="ui five fluid special cards">
+            {{#each movies}}
+
+            <div class="ui fluid raised card">
+                <div class="blurring dimmable image">
+                    <div class="ui dimmer">
+                        <div class="content">
+                            <div class="center">
+                              
+                                <a href="/otra/movies/{{id}}/cinemas">
+                                    <div class="ui inverted button">Cinemas em Exibicao</div>
+                                </a>
+                                
+                               
+                               
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <img src="http://image.tmdb.org/t/p/w185/{{poster_path}}">
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+
+
+        <script>
+            $('.special.cards .image').dimmer({ on: 'hover' });
+            ;
+        </script>
+
+        <!-- 
           <div class="ui three column grid container">
             <div class="column right aligned"> Made for </div>
             <div class="column middle aligned"> 
@@ -28,6 +70,7 @@
             </div>
             <div class="column left aligned"> By the Best.. </div>
           </div>      -->
-       </div>
-  </body>
+    </div>
+</body>
+
 </html>
